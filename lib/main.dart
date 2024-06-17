@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false, //quita la etiqueta roja de debug
       title: 'Tarjeta de Posteo',
       home: PantallaPrincipal(),
+      
     );
   }
 }
