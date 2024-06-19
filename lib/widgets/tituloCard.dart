@@ -10,7 +10,7 @@ class tituloCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: [ //fila donde esta el icono y mi nombre completo
-      CircleAvatar(
+      const CircleAvatar(
         child: Text("K")
       ), 
       SizedBox(width: 10,), //espaciado entre el icono y el texto

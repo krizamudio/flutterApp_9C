@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/datos/datos.dart';
-import 'package:flutter_application_2/widgets/tarjetaFeed.dart';
+import 'package:flutter_application_2/pantallas/formulario.dart';
+import 'package:flutter_application_2/pantallas/listaFeed.dart';
+import 'package:flutter_application_2/pantallas/paginaBuscar.dart';
+import 'package:flutter_application_2/pantallas/paginaCuenta.dart';
+import 'package:flutter_application_2/pantallas/tyc.dart';
 
 class PantallaPrincipal extends StatefulWidget {
   const PantallaPrincipal({
@@ -15,9 +18,9 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
 
   int _paginaActual = 0;
   final List<Widget> _paginas = [
-    listaFeed(),
-    paginaBuscar(),
-    paginaCuenta()
+    const listaFeed(),
+    const paginaBuscar(),
+    const paginaCuenta()
   ];
 
   @override
@@ -28,9 +31,43 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
         backgroundColor: const Color.fromARGB(255, 44, 44, 44),
         title: const Text('FeisCool', style: TextStyle(color: Colors.white),),
       ),
-      body: _paginas[_paginaActual], 
-      //listaFeed(),
-
+      body: Column(
+        children: [
+          Expanded(child: _paginas[_paginaActual]), //muestra la pagina actual
+          Row( //fila de botones
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              OutlinedButton(onPressed: (){ //boton de TyC
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const tyc()));
+              }, 
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(
+                  width: 5.0, color: Colors.white
+                )
+              ),
+              child: const Text("Terminos y Condiciones", style: TextStyle(
+                color: Colors.white
+              ),
+              ),
+              ),
+              OutlinedButton(onPressed: (){ //boton de formulario
+                Navigator.push(context, MaterialPageRoute(builder: (context) => formulario()));
+              }, 
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(
+                  width: 5.0, color: Colors.white
+                )
+              ),
+              child: const Text("Ir a formulario", style: TextStyle(
+                color: Colors.white
+              ),
+              ),
+              ),
+            ],
+          )
+        ],
+      ), 
+      
       bottomNavigationBar: BottomNavigationBar(
       currentIndex: _paginaActual,
       onTap: (index) {
@@ -41,59 +78,10 @@ class _PantallaPrincipalState extends State<PantallaPrincipal> {
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Inicio"),
         BottomNavigationBarItem(icon: Icon(Icons.search), label: "Buscar"),
-        BottomNavigationBarItem(icon: Icon(Icons.add_circle), label: "Circulo")
-      ]    
-          
-        
-
-      ),
+        BottomNavigationBarItem(icon: Icon(Icons.android), label: "Perfil")
+      ]),
+      
       backgroundColor: Color.fromARGB(255, 119, 119, 119), //color de fondo de la app
-      //floatingActionButton: FloatingActionButton(
-        //onPressed: (){}, //acciones que hara el botón 
-        //child: Icon(Icons.add_comment_sharp) //icono que aparece en el botón (+)
-        //), 
-    );
-  }
-}
-
-class listaFeed extends StatelessWidget {
-  const listaFeed({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: listaCards.length,
-      itemBuilder: (context, index) {
-        return tarjetaFeed(tarjeta: listaCards[index]);
-      },
-    );
-  }
-}
-
-class paginaBuscar extends StatelessWidget {
-  const paginaBuscar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: const Center(
-        child: Text('Buscar'),
-      ),
-    );
-  }
-}
-
-class paginaCuenta extends StatelessWidget {
-  const paginaCuenta({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: const Center(
-        child: Text('Cuenta'),
-      ),
     );
   }
 }

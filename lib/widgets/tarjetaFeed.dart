@@ -31,7 +31,7 @@ class tarjetaFeed extends StatelessWidget {
             descripcionCard(descripcion: tarjeta["descripcion"]!,),//para que se muestre los puntos suspensivos al final del texto
             imagenCard(imagen: tarjeta["imagen"]!),
             Container(
-              child: botonesCard()
+              child: const botonesCard()
             )
           ],
         )
